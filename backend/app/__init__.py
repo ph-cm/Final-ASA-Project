@@ -1,8 +1,8 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from .app.models.user import User
-from .app.models.flight import Flight
-from .app.models.bookings import Booking
+from .models.user import User
+from .models.flight import Flight
+from .models.bookings import Booking
 
 db = SQLAlchemy()
 

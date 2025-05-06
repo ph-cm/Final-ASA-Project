@@ -1,4 +1,4 @@
-from FinalASAProject.backend import db
+from FinalASAProject.backend.app import db
 from __init__ import d
 
 class User(db.Model):
