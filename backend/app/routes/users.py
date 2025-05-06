@@ -42,7 +42,7 @@ def create_user():
     return jsonify(new_user), 201
 
 # PUT /users/<id> - atualizar
-@users_bp.route("/<int:user_id>", methods=["PUT"])
+@users_bp.route("/<int:user_id>", methods=["."])
 def update_user(user_id):
     user = find_user(user_id)
     if not user:
