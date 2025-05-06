@@ -8,16 +8,15 @@ flights_db = [
 ]
 
 def find_flight(flight_id):
-    return next((f for f in flights_bp if f["id"] == flight_id), None)
+    return next((f for f in flights_db if f["id"] == flight_id), None)
 
 @flights_bp.route("/", methods=["GET"])
 def get_flights():
-    return jsonify(flights_bp), 200
+    return jsonify(flights_db), 200
 
 @flights_bp.route("/<int:flight_id>", methods=["GET"])
 def get_flight(flight_id):
     flight = find_flight(flight_id)
-    
     if flight:
         return jsonify(flight), 200
     return jsonify({"error": "Voo nao encontrado"}), 404
@@ -25,10 +24,9 @@ def get_flight(flight_id):
 @flights_bp.route("/", methods=["POST"])
 def create_flight():
     data = request.get_json()
-    
     if not data.get("origem") or not data.get("destino") or not data.get("numero_voo"):
-        return jsonify ({"error": "Campos 'origem', 'destino' e 'numero_voo' sao obrigatorios"}), 400
-    
+        return jsonify({"error": "Campos 'origem', 'destino' e 'numero_voo' sao obrigatorios"}), 400
+
     new_id = max(f["id"] for f in flights_db) + 1 if flights_db else 1
     new_flight = {
         "id": new_id,
@@ -36,7 +34,6 @@ def create_flight():
         "destino": data["destino"],
         "numero_voo": data["numero_voo"]
     }
-    
     flights_db.append(new_flight)
     return jsonify(new_flight), 201
 
