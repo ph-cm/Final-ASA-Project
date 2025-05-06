@@ -1,4 +1,4 @@
-from app import db
+from FinalASAProject.backend import db
 
 class Flight(db.Model):
     __tablename__ = 'flights'
